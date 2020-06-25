@@ -1,6 +1,7 @@
 package com.project.zosmf.controller;
 
 import com.project.zosmf.service.SortService;
+import com.project.zosmf.utils.AuthUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,8 +19,11 @@ public class SortController {
 
     @CrossOrigin(origins = "*", allowCredentials = "true")
     @RequestMapping(value = "/autoSort", method = RequestMethod.GET)
-    public String autoSort(HttpSession session) {
-        return sortService.sortTableAndMergeThem(session);
+    public ResponseEntity<String> autoSort(HttpSession session) {
+        if (AuthUtil.notLogin(session)) {
+            return ResponseEntity.status(401).body(null);
+        }
+        return ResponseEntity.ok(sortService.sortTableAndMergeThem(session));
     }
 
 }
