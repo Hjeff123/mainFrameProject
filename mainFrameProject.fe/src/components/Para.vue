@@ -14,7 +14,7 @@
       >
         <a-popover style="cursor: pointer" slot="suffix">
           <template slot="content">
-            巴巴爸爸
+            如：ST034.DATA1(TEST1)
           </template>
           <a-icon type="question-circle" />
         </a-popover>
@@ -33,7 +33,7 @@
       >
         <a-popover style="cursor: pointer" slot="suffix">
           <template slot="content">
-            巴巴爸爸
+            如：ST034.DATA1(TEST2)
           </template>
           <a-icon type="question-circle" />
         </a-popover>
@@ -52,7 +52,7 @@
       >
         <a-popover style="cursor: pointer" slot="suffix">
           <template slot="content">
-            巴巴爸爸
+            如：ST034.DATA(TEST)
           </template>
           <a-icon type="question-circle" />
         </a-popover>

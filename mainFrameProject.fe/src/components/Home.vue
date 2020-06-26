@@ -1,6 +1,6 @@
 <template>
   <a-layout class="layout">
-      <a-layout-header style="display: flex; background: #fff; padding: 0">
+      <a-layout-header style="display: flex;background: #2c3e50; padding: 0">
         <h2 class="title">大型主机实验平台</h2>
         <div style="margin-right: 24px;">
           <a-dropdown>
@@ -126,5 +126,6 @@
 
   .title {
     margin: auto;
+    color:white
   }
 </style>

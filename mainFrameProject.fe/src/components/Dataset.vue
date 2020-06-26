@@ -15,7 +15,7 @@
         >
           <a-popover style="cursor: pointer" slot="suffix">
             <template slot="content">
-              巴巴爸爸
+              如：ST065.DATA(GRADEMIX)
             </template>
             <a-icon type="question-circle" />
           </a-popover>

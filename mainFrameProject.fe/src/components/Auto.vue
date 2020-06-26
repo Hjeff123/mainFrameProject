@@ -14,12 +14,15 @@
         </span>
       </a-form-item>
       <div class="fff">
-        <p>//LSTCATA JOB ,'USER',NOTIFY=&SYSUID</p>
-        <p>//STEP1 EXEC PGM=IDCAMS</p>
-        <p>//SYSPRINT DD SYSOUT=*</p>
-        <p>//SYSIN DD *</p>
-        <p> LISTCAT ENT(ST034) ALL</p>
-        <p>/*</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;//ST027T JOB TEST,NOTIFY=&SYSUID,TIME=2</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;    //STEP1 EXEC PGM=SORT</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;//SORTIN DD DSN=ST034.DATA1(TEST1),DISP=SHR</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;//       DD DSN=ST034.DATA1(TEST2),DISP=SHR</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;//SORTOUT DD SYSOUT=*</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;//SYSOUT DD SYSOUT=*</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;//SYSIN DD *</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;SORT FIELDS=(2,5,CH,A)</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;/*</p>
       </div>
       <a-form-item>
         <a-button type="primary" html-type="submit" :loading="isLoading">
@@ -27,13 +30,9 @@
         </a-button>
       </a-form-item>
     </a-form>
-    <a-collapse :bordered="false" v-if="result">
-      <a-collapse-panel
-        v-for="item in result"
-        :key="item.id"
-        :header="item.ddName"
-      >
-        <pre v-if="item.output">{{ item.output }}</pre>
+    <a-collapse :bordered="true" v-if="result" v-model="activeKey">
+      <a-collapse-panel key="1" disabled="true">
+        <pre>{{result}}</pre>
       </a-collapse-panel>
     </a-collapse>
   </div>
@@ -47,7 +46,9 @@
       return {
         form: this.createForm(),
         isLoading: false,
-        result: null
+        result: null,
+        activeKey:['1']
+
       };
     },
 

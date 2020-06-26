@@ -32,13 +32,9 @@
         </a-button>
       </a-form-item>
     </a-form>
-    <a-collapse :bordered="false" v-if="result">
-      <a-collapse-panel
-        v-for="item in result"
-        :key="item.id"
-        :header="item.ddName"
-      >
-        <pre v-if="item.output">{{ item.output }}</pre>
+    <a-collapse :bordered="true" v-if="result" v-model="activeKey">
+      <a-collapse-panel key="1" disabled="true">
+        <pre>{{result}}</pre>
       </a-collapse-panel>
     </a-collapse>
   </div>
@@ -52,7 +48,9 @@ export default {
     return {
       form: this.$form.createForm(this),
       isLoading: false,
-      result: null
+      result: null,
+      activeKey:['1']
+
     };
   },
 
@@ -67,9 +65,11 @@ export default {
         if (errors) return;
         this.isLoading = true;
         try {
-          const response = await Axios.post("http://localhost:8085/autoSort", { //todo
-            jcl: values.jcl
-          });
+          const response = await Axios.get("http://localhost:8085/autoSort2", {
+            params:{
+              jcl:values.jcl
+            }
+        });
           if (response.status === 200) {
             this.result = response.data;
             this.$message.success("Job 执行成功").then();
