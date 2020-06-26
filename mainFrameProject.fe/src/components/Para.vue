@@ -4,7 +4,7 @@
       <a-input
         v-focus
         v-decorator="[
-            'account',
+            'input1',
             {
               rules: [{ required: true, message: '数据集名字不能为空' }]
             }
@@ -23,7 +23,7 @@
     <a-form-item>
       <a-input
         v-decorator="[
-            'password',
+            'input2',
             {
               rules: [{ required: true, message: '数据集名字不能为空' }]
             }
@@ -42,9 +42,9 @@
     <a-form-item>
       <a-input
         v-decorator="[
-            'address',
+            'output',
             {
-              rules: [{ required: true, message: '地址不能为空' }]
+              rules: [{ required: true, message: '数据集名字不能为空' }]
             }
           ]"
         size="large"
@@ -72,9 +72,74 @@
 </template>
 
 <script>
-    export default {
-        name: "Para"
+  import Axios from "axios"
+  import { Modal } from "ant-design-vue";
+
+  export default {
+    name: "Para",
+    data() {
+      return {
+        form: this.$form.createForm(this),
+        isLoading: false
+      };
+    },
+    mounted() {
+    },
+    methods: {
+      handleSubmit(e) {
+        e.preventDefault();
+        this.form.validateFields(async err => {
+          if (err) return;
+
+          this.doSort();
+        });
+      },
+
+      async doSort() {
+        this.isLoading = true;
+
+        try {
+          const io = this.form.getFieldsValue();
+          const response = await Axios.get("http://localhost:8085/autoSort1",{
+            params:{
+              input1:io.input1,
+              input2:io.input2,
+              output:io.output
+            }
+          });
+          switch (+response.status) {
+            case 200: {
+              this.$message.success("Job 执行成功").then();
+              console.log(response.data)
+              return;
+            }
+            case 401:
+              Modal.error({
+                title: "操作失败",
+                content: "网络错误",
+                centered: true
+              });
+          }
+        } catch (error) {
+          if (error.message.includes("401")) {
+            Modal.error({
+              title: "操作失败",
+              content: "网络错误",
+              centered: true
+            });
+          } else {
+            Modal.error({
+              title: "操作失败",
+              content: error.message,
+              centered: true
+            });
+          }
+        } finally {
+          this.isLoading = false;
+        }
+      }
     }
+  };
 </script>
 
 <style scoped>

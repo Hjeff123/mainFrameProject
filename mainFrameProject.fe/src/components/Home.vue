@@ -30,6 +30,7 @@
               <a-tab-pane tab="JCL" key="jcl"><JCL /></a-tab-pane>
               <a-tab-pane tab="模板JCL" key="auto"><Auto /></a-tab-pane>
               <a-tab-pane tab="参数" key="para"><Para/></a-tab-pane>
+              <a-tab-pane tab="查看数据集" key="dataset"><Dataset/></a-tab-pane>
             </a-tabs>
           </div>
         </div>
@@ -44,10 +45,11 @@
   import JCL from "@/components/JCL"
   import Auto from "@/components/Auto"
   import Para from "@/components/Para"
+  import Dataset from "@/components/Dataset";
 
   export default {
     name: "Home",
-    components: {VueMarkdown,JCL,Auto,Para},
+    components: {Dataset, VueMarkdown,JCL,Auto,Para},
     data() {
       return {
         htmlMD:this.getContent()
