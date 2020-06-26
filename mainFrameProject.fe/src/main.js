@@ -7,11 +7,13 @@ import Antd from "ant-design-vue";
 import store from "./store"
 import "ant-design-vue/dist/antd.css";
 import VueResource from "vue-resource";
+import Axios from "axios";
+
+Axios.defaults.withCredentials = true;
 
 Vue.use(Antd);
 Vue.use(VueResource);
 Vue.config.productionTip = false
-
 Vue.directive("focus", {
   // When the bound element is inserted into the DOM...
   inserted: function(el) {
