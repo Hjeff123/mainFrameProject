@@ -36,4 +36,13 @@ public class SortController {
         return ResponseEntity.ok(sortService.sortTableAndMergeThem1(session, input1, input2, output));
     }
 
+    @CrossOrigin(origins = "*", allowCredentials = "true")
+    @RequestMapping(value = "/autoSort2", method = RequestMethod.GET)
+    public ResponseEntity<String> autoSort2(@RequestParam String jcl, HttpSession session) {
+        if (AuthUtil.notLogin(session)) {
+            return ResponseEntity.status(401).body(null);
+        }
+        return ResponseEntity.ok(sortService.sortTableAndMergeThem2(session, jcl));
+    }
+
 }
