@@ -22,11 +22,11 @@
       >
         <div class="lab-container">
           <div class="left">
-            <VueMarkdown :source="htmlMD"></VueMarkdown>
+            <vue-markdown :source="htmlMD"></vue-markdown>
           </div>
           <div class="divider"></div>
           <div class="right">
-            <a-tabs type="card" :defaultActiveKey="defaultTab">
+            <a-tabs type="card">
               <a-tab-pane tab="JCL" key="jcl"><JCL /></a-tab-pane>
               <a-tab-pane tab="模板JCL" key="auto"><Auto /></a-tab-pane>
               <a-tab-pane tab="参数" key="para"><Para/></a-tab-pane>
@@ -64,7 +64,6 @@
       getContent(){
         Axios.get(`/static/intro.md`)
           .then(response => {
-            console.log(response.data);
             this.htmlMD = response.data;
             return response.data;
           })
@@ -97,7 +96,6 @@
   .layout {
     min-height: 100vh;
     transition: margin-left 0.2s;
-
   }
 
   .lab-container {

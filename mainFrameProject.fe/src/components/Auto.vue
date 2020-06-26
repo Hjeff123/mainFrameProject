@@ -12,19 +12,15 @@
             <a-icon type="question-circle" />
           </a-popover>
         </span>
-        <a-textarea
-          :autosize="{ minRows: 5 }"
-          placeholder="啊啊啊啊啊"
-          v-decorator="[
-            'jcl',
-            {
-              rules: [
-                { required: true, message: '请输入 JCL 代码' },
-                { validator: this.jclValidator }
-              ]
-            }
-          ]"></a-textarea>
       </a-form-item>
+      <div class="fff">
+        <p>//LSTCATA JOB ,'USER',NOTIFY=&SYSUID</p>
+        <p>//STEP1 EXEC PGM=IDCAMS</p>
+        <p>//SYSPRINT DD SYSOUT=*</p>
+        <p>//SYSIN DD *</p>
+        <p> LISTCAT ENT(ST034) ALL</p>
+        <p>/*</p>
+      </div>
       <a-form-item>
         <a-button type="primary" html-type="submit" :loading="isLoading">
           提交
@@ -72,11 +68,11 @@
           if (errors) return;
           this.isLoading = true;
           try {
-            const response = await Axios.post("/api/jcl", {
-              jcl: values.jcl
+            const response = await Axios.get("http://localhost:8085/autoSort", {
             });
             if (response.status === 200) {
               this.result = response.data;
+              console.log(response.data)
               this.$message.success("Job 执行成功").then();
             } else {
               this.$message.warn("Job 已提交，但服务器响应超时").then();
@@ -102,3 +98,10 @@
     }
   };
 </script>
+
+<style lang="scss" scoped>
+  .fff{
+    background: #eeeeee;
+  }
+
+</style>

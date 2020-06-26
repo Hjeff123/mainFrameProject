@@ -50,14 +50,15 @@ const actions = {
   login({ commit }, loginState) {
     commit("SET_USER", loginState.uid);
     commit("SET_ROLE", loginState.role);
-    router.push("/");
+
+    router.push("/home");
   },
 
   logout({ commit }) {
-    Axios.delete("/api/logoff").finally(() => {
+    Axios.delete("http://localhost:8085/logoff").finally(() => {
       commit("SET_USER", "");
       commit("SET_ROLE", "");
-      router.push("/");
+      router.push("/login");
     });
   }
 };

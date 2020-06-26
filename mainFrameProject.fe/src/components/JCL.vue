@@ -13,7 +13,7 @@
           </a-popover>
         </span>
         <a-textarea
-          :autosize="{ minRows: 5 }"
+          :autoSize="{ minRows: 5 }"
           placeholder="请输入 JCL 代码"
           v-decorator="[
             'jcl',
@@ -67,7 +67,7 @@ export default {
         if (errors) return;
         this.isLoading = true;
         try {
-          const response = await Axios.post("/api/jcl", {
+          const response = await Axios.post("http://localhost:8085/autoSort", { //todo
             jcl: values.jcl
           });
           if (response.status === 200) {

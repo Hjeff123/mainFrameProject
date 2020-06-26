@@ -11,12 +11,17 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  #app {
+    min-height: 100vh;
+  }
+  pre {
+    background: #eee;
+    padding: 1em;
+    margin: 1em 0 !important;
+
+    border: 1px solid #ddd;
+  }
+  .ant-input {
+    font-family: monospace !important;
+  }
 </style>

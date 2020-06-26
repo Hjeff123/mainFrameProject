@@ -129,8 +129,9 @@
           switch (+response.status) {
             case 200: {
               var loginState = {
-                uid:user["account"],
-                role:"student"
+                role:"student",
+                uid:user["account"]
+
               }
               console.log(loginState)
               await this.$store.dispatch("user/login", loginState);
