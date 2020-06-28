@@ -8,26 +8,13 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
-import java.util.List;
-import java.util.Map;
 
 @Controller
 public class DatasetController {
     @Resource
     private DatasetService datasetService;
 
-    @CrossOrigin(origins = "*", allowCredentials = "true")
-    @RequestMapping(value = "/dataset", method = RequestMethod.GET)
-    public ResponseEntity<List<Map<String, String>>> getDatasetList(@RequestParam String pattern, HttpSession session) {
-        if (AuthUtil.notLogin(session)) {
-            return ResponseEntity.status(401).body(null);
-        }
-        return ResponseEntity.ok(datasetService.getDatasetList(session, pattern));
-    }
-
-    /**
-     * get content of a sequential dataset or a partitioned dataset member
-     */
+    //获取一个数据集的内容（可以为顺序数据集或是分区数据集的一个成员）
     @CrossOrigin(origins = "*", allowCredentials = "true")
     @RequestMapping(value = "/dataset/{name}", method = RequestMethod.GET)
     public ResponseEntity<String> getContent(@PathVariable String name, HttpSession session) {

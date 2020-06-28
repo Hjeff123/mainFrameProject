@@ -38,10 +38,9 @@ public class SslUtil {
         trustAllCerts[0] = tm;
         SSLContext sc;
         try {
-            sc = SSLContext.getInstance("TLS");//sc = SSLContext.getInstance("TLS")
+            sc = SSLContext.getInstance("TLS");
             sc.init(null, trustAllCerts, null);
             socketFactory = new SSLConnectionSocketFactory(sc, NoopHostnameVerifier.INSTANCE);
-            //HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
         } catch (NoSuchAlgorithmException | KeyManagementException e) {
             e.printStackTrace();
         }
@@ -55,11 +54,11 @@ public class SslUtil {
         }
 
         public void checkServerTrusted(X509Certificate[] certs, String authType) {
-            //don't check
+
         }
 
         public void checkClientTrusted(X509Certificate[] certs, String authType) {
-            //don't check
+
         }
     }
 }

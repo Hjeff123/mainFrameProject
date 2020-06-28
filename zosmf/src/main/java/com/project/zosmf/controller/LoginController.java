@@ -30,7 +30,6 @@ public class LoginController {
                     return ResponseEntity.status(502).body("zosmf time out");
             }
         }
-        //loginService.setRole(session);
         return ResponseEntity.ok("successful");
     }
 

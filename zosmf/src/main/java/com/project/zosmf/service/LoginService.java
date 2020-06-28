@@ -1,6 +1,5 @@
 package com.project.zosmf.service;
 
-import com.project.zosmf.utils.AuthUtil;
 import com.project.zosmf.utils.SslUtil;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.springframework.http.HttpEntity;
@@ -14,7 +13,6 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -85,29 +83,4 @@ public class LoginService {
         session.removeAttribute("ZOSMF_Address");
         session.removeAttribute("ZOSMF_Account");
     }
-
-    /*public Map<String, String> getLoginInfo(HttpSession session) {
-        Map<String, String> map = new HashMap<>();
-        map.put("uid", session.getAttribute("ZOSMF_Account").toString().toUpperCase());
-        if (AuthUtil.notTeacherLogin(session))
-            map.put("role", "student");
-        else
-            map.put("role", "teacher");
-        return map;
-    }*/
-
-    /*public void setRole(HttpSession session) {
-        //判断是否教师登录
-        session.setAttribute("is_teacher", "no");
-        try {
-            String sql = "select * from teacher where id=?";
-            List<Map<String, Object>> list = jdbcTemplate.queryForList(sql, session.getAttribute("ZOSMF_Account").toString());
-            if (list.size() > 0) {
-                //存在教师表中，赋予教师身份
-                session.setAttribute("is_teacher", "yes");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }*/
 }

@@ -5,17 +5,10 @@ import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpSession;
 
-/**
- * 向主机服务器提交JCL并且获取返回信息
- */
-
 @Service
 public class JclService {
-    /**
-     * submit a jcl for a specific output item
-     *
-     * @param id id of that output
-     */
+
+    //向主机服务器提交JCL并且获取返回信息
     @SuppressWarnings("SameParameterValue")
     String submitJCL(HttpSession session, String jcl, int id) {
         JobInfo jobInfo = ZosmfUtil.go(session, "/zosmf/restjobs/jobs", HttpMethod.PUT, jcl, null, JobInfo.class);

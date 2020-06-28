@@ -14,7 +14,7 @@ public class ZosmfUtil {
 
     private static HttpComponentsClientHttpRequestFactory requestFactory;
 
-    // disable check of SSL Cert
+    //禁用证书验证
     static {
         CloseableHttpClient httpClient = SslUtil.SslHttpClientBuild();
         requestFactory
@@ -22,16 +22,7 @@ public class ZosmfUtil {
         requestFactory.setHttpClient(httpClient);
     }
 
-    /**
-     * issue an http request to s/OSMF
-     *
-     * @param session      http session
-     * @param path         path of z/OSMF API( with params maybe ) starting with "/"
-     * @param method       http method
-     * @param responseType class type of response
-     * @param body         body of request. it can be null
-     * @return response entity of class type T
-     */
+    //向主机发起请求
     public static <T> T go(HttpSession session, String path, HttpMethod method, Object body, HttpHeaders headers, Class<T> responseType) {
         Object ZOSMF_JSESSIONID = session.getAttribute("ZOSMF_JSESSIONID");
         Object ZOSMF_LtpaToken2 = session.getAttribute("ZOSMF_LtpaToken2");
@@ -51,14 +42,7 @@ public class ZosmfUtil {
         return new RestTemplate(requestFactory).exchange(urlOverHttps, method, request, responseType).getBody();
     }
 
-    /**
-     * polling for job status
-     *
-     * @param session http session
-     * @param path    path of z/OSMF API( with params maybe )
-     * @param seconds polling for how many seconds
-     * @return true if job is ready in giving time, otherwise false
-     */
+    //获取作业状态
     public static boolean isReady(HttpSession session, String path, int seconds) {
         Object ZOSMF_JSESSIONID = session.getAttribute("ZOSMF_JSESSIONID");
         Object ZOSMF_LtpaToken2 = session.getAttribute("ZOSMF_LtpaToken2");
@@ -73,7 +57,7 @@ public class ZosmfUtil {
 
         for (int i = 0; i < seconds; i++) {
             try {
-                Thread.sleep(1000);// millisecond
+                Thread.sleep(1000);
             } catch (Exception e) {
                 e.printStackTrace();
             }
